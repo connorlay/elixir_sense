@@ -30,6 +30,7 @@ defmodule ElixirSense.Providers.Docs do
 
     {mod, fun, _found} =
       subject
+      |> String.trim_leading(".")
       |> Source.split_module_and_func(module, aliases)
       |> expand(binding_env, aliases)
       |> Introspection.actual_mod_fun(imports, aliases, module, mods_funs, metadata_types)

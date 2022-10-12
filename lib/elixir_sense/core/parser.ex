@@ -125,6 +125,10 @@ defmodule ElixirSense.Core.Parser do
 
   defp normalize_error({:error, {[line: line, column: _column], msg, detail}}),
     do: {:error, {line, msg, detail}}
+    
+  defp fix_parse_error(source, _cursor_line_number, {:error, {line, "syntax error before" <> _, "'.'"}}) do
+    String.trim_leading(source, ".")
+  end
 
   defp fix_parse_error(
          source,

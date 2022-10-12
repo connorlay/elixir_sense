@@ -61,6 +61,7 @@ defmodule ElixirSense.Providers.Definition do
 
       true ->
         subject
+        |> String.trim_leading(".")
         |> Source.split_module_and_func(module, aliases)
         |> find_function_or_module(
           mods_funs_to_positions,
